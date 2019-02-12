@@ -2,8 +2,6 @@
     <div class="card-header">
         {{pageTitle}}
     </div>
-    
-    <div class="test" *ngIf='pageTitle'>THIS IS A TEST!</div>
     <div class="card-body">
         <div class="row">
             <div class="col-md-2">Filter by:</div>
@@ -16,11 +14,13 @@
         </div>
     </div>
     <div class='table-responsive'>
-        <table class='table' *ngIf='products && products.length'>
+        <table class='table'
+               *ngIf='products && products.length'>
             <thead>
                 <tr>
                     <th>
-                        <button class='btn btn-primary'>Show Image</button>
+                        <button class='btn btn-primary'
+                                (click)='toggleImage()'>Show Image</button>
                     </th>
                     <th>Product</th>
                     <th>Code</th>
@@ -32,10 +32,11 @@
             <tbody>
                 <tr *ngFor='let product of products'>
                     <td>
-                        <img [src]='product.imageUrl'
-                        [title]='product.productName'
-                        [style.width.px]='imageWidth'
-                        [style.height.px]='imageMargin'>
+                        <img *ngIf='showImage'
+                            [src]='product.imageUrl'
+                             [title]='product.productName'
+                             [style.width.px]='imageWidth'
+                             [style.margin.px]='imageMargin'>
                     </td>
                     <td>{{ product.productName}}</td>
                     <td>{{productCode}}</td>
