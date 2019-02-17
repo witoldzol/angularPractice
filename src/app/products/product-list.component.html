@@ -5,12 +5,13 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-2">Filter by:</div>
-            <div class="col-md-4"><input type="text"></div>
+            <div class="col-md-4"><input type="text"
+                       [(ngModel)]='lastFilter'></div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-6">
-            <h4>Filtered by:</h4>
+            <h4>Filtered by: {{lastFilter}}</h4>
         </div>
     </div>
     <div class='table-responsive'>
@@ -20,7 +21,9 @@
                 <tr>
                     <th>
                         <button class='btn btn-primary'
-                                (click)='toggleImage()'>Show Image</button>
+                                (click)='toggleImage()'>
+                            {{showImage ? 'Hide' : 'Show'}} Image
+                        </button>
                     </th>
                     <th>Product</th>
                     <th>Code</th>
@@ -33,15 +36,15 @@
                 <tr *ngFor='let product of products'>
                     <td>
                         <img *ngIf='showImage'
-                            [src]='product.imageUrl'
+                             [src]='product.imageUrl'
                              [title]='product.productName'
                              [style.width.px]='imageWidth'
                              [style.margin.px]='imageMargin'>
                     </td>
                     <td>{{ product.productName}}</td>
-                    <td>{{productCode}}</td>
+                    <td>{{ product.productCode | lowercase | convertToSpaces:'-'}}</td>
                     <td>{{product.releaseDate}}</td>
-                    <td>{{product.price}}</td>
+                    <td>{{product.price | currency:'USD':'symbol':'1.2-2'}}</td>
                     <td>{{product.starRating}}</td>
                 </tr>
             </tbody>
