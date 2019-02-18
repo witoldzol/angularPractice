@@ -44,6 +44,11 @@ export class ProductListComponent implements OnInit {
             "starRating": 4.2,
             "imageUrl": "https://openclipart.org/image/300px/svg_to_png/58471/garden_cart.png"
         }]
+
+    constructor() {
+        this.filteredProducts = this.products
+        this.listFilter = 'cart'
+    }
     toggleImage(): void {
         this.showImage = !this.showImage
     }
